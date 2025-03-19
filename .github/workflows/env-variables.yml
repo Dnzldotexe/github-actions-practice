@@ -15,16 +15,8 @@ jobs:
       - name: Greetings
         run: echo "Hello, ${{ env.CHANNEL_NAME }}!"
 
-      - name: Get comments on ${{ env.CHANNEL_NAME }}
-        run: |
-          # /api/comments
-          echo "Awesome!!"
-          echo "Great content"
-          echo "Thank you for sharing."
+      - name: Set environment variables programmatically
+        run: echo "count=10000" >> $GITHUB_ENV
 
-  job2:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Greetings
-        run: echo "Hello, ${{ env.CHANNEL_NAME }} from job2!"
+      - name: Access env variable
+        run: echo  ${{ env.COUNT }}
