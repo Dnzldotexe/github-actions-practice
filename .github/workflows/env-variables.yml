@@ -16,7 +16,17 @@ jobs:
         run: echo "Hello, ${{ env.CHANNEL_NAME }}!"
 
       - name: Set environment variables programmatically
-        run: echo "count=10000" >> $GITHUB_ENV
+        run: echo "COUNT=10000" >> $GITHUB_ENV
 
       - name: Access env variable
-        run: echo  ${{ env.COUNT }}
+        run: echo ${{ env.COUNT }}
+
+      - name: Update environment variables
+        run: |
+          echo "CHANNEL_NAME=Test" >> $GITHUB_ENV
+          echo "COUNT=20000" >> $GITHUB_ENV
+
+      - name: Access env variables
+        run: |
+          echo ${{ env.CHANNEL_NAME }}
+          echo ${{ env.COUNT }}
