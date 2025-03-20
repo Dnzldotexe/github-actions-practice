@@ -13,6 +13,8 @@ jobs:
         with:
           name: build-artifact
           path: ./artifact
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
           run-id: 13969911853
       
       - name: Display downlaoded artifact structure
