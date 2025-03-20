@@ -4,14 +4,13 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-
-concurrency:
-  group: ci-${{ github.workflow }}
-  cancel-in-progress: false
  
 jobs:
   build-angular:
     runs-on: ubuntu-latest
+    concurrency:
+      group: ci-${{ github.workflow }}
+      cancel-in-progress: false
     
     steps:
       - name: Checkout
@@ -33,4 +32,12 @@ jobs:
         with:
           name: build-artifact
           path: ./dist
-  
+
+  deploy-angular:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: cd-${{ github.workflow }}
+      cancel-in-progress: false
+    steps:
+      - name: Sleep
+        run: sleep 10
