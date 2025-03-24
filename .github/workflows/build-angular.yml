@@ -16,10 +16,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node JS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.14.0 # or use 22.X
+      - name: Setup Python and Node JS
+        uses: Dnzldotexe/github-actions-practice/InstallPythonNodeJsAction@main
         
       - name: Install dependencies
         run: npm install
