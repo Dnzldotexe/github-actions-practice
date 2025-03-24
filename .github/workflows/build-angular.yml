@@ -16,9 +16,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python and Node JS
-        uses: Dnzldotexe/github-actions-practice/InstallPythonNodeJsAction@main
-        
+      - name: Setup Build Environment
+        id: setup-build-env
+        uses: Dnzldotexe/github-actions-practice/SetupBuildEnvironmentAction@main
+        with:
+          pythonVersion: 3.12
+          nodejsVersion: 22.14.0
+
+      - name: Outputs from action
+        run: |
+          echo "Repository Owner = ${{ steps.setup-build-env.outputs.repoOwner }}"
+          echo "Default Branch = ${{ steps.setup-build-env.outputs.defaultBranch }}"
+          echo "CI CD Key = ${{ steps.setup-build-env.outputs.cicdKey }}"
       - name: Install dependencies
         run: npm install
 
