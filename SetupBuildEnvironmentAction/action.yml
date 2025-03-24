@@ -1,0 +1,42 @@
+name: Setup Build Environment
+
+inputs:
+  pythonVersion:
+    description: Version of Python
+    required: false
+    default: '3.x'
+  nodejsVersion:
+    description: Version of Node JS
+    required: false
+    default: '22.x'
+
+outputs:
+  repoOwner:
+    description: Repository Owner
+    value: ${{ steps.vars.outputs.RepositoryOwner }}
+  defaultBranch:
+    description: Default Branch
+    value: ${{ steps.vars.outputs.DefaultBranch }}
+  cicdKey:
+    description: CI CD Key
+    value: ${{ steps.vars.outputs.CICDKey }}
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Setup Python      
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Setup Node JS
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22.x'
+
+    - name: Variables
+      run: |
+        echo "RepositoryOwner=${{ github.repository_owner }}" >> $GITHUB_OUTPUT
+        echo "DefaultBranch=main" >> $GITHUB_OUTPUT
+        echo "CICDKey=MyCICDKey" >> $GITHUB_OUTPUT
